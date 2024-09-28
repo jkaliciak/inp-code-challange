@@ -58,6 +58,7 @@ android {
 
 dependencies {
     implementation(project(":common:theme"))
+    implementation(project(":common:translation"))
     implementation(project(":feature:shipments-ui"))
     implementation(project(":feature:shipments-data:api"))
     implementation(project(":feature:shipments-data:impl"))

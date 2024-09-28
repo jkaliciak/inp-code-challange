@@ -1,4 +1,6 @@
 <resources>
+    <string name="app_name">InPost Recruitment Task</string>
+
     <string name="status_adopted_at_sorting_center">Received at Sort Centre</string>
     <string name="status_sent_from_sorting_center">Despatched from Sort Centre</string>
     <string name="status_adopted_at_source_branch">Received at Collection Depot</string>
@@ -13,4 +15,16 @@
     <string name="status_ready_to_pickup">Ready to collect</string>
     <string name="status_returned_to_sender">Returned to sender</string>
     <string name="status_unknown">Unknown</string>
+
+    <string name="shipment_item_parcel_number_label">Parcel number</string>
+    <string name="shipment_item_parcel_status_label">Status</string>
+    <string name="shipment_item_parcel_sender_label">Sender</string>
+    <string name="shipment_item_more_button">More</string>
+    <string name="shipment_item_date_time_status_awaiting_collection">Awaiting collection until</string>
+    <string name="shipment_item_date_time_status_delivered">Delivered</string>
+    <string name="shipment_item_icon_content_description">Locker icon</string>
+    <string name="shipment_item_more_icon_content_description">More button icon</string>
+
+    <string name="header_item_ready_to_pickup">Ready to collect</string>
+    <string name="header_item_other">Other</string>
 </resources>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">InPost Recruitment Task</string>
-
-    <string name="menu_ready_to_pickup">Gotowe do odbioru</string>
-    <string name="menu_other">Pozostałe</string>
-    <string name="menu_all">Wszystkie</string>
-</resources>

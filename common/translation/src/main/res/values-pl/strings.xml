@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">InPost Recruitment Task</string>
+
     <string name="status_adopted_at_sorting_center">Przyjęta w Sortowni</string>
     <string name="status_sent_from_sorting_center">Wysłana z Sortowni</string>
     <string name="status_adopted_at_source_branch">Przyjęta w Oddziale</string>
@@ -14,4 +16,16 @@
     <string name="status_ready_to_pickup">Gotowa do odbioru</string>
     <string name="status_returned_to_sender">Zwrot do Nadawcy</string>
     <string name="status_unknown">Nieznany</string>
+
+    <string name="shipment_item_parcel_number_label">Numer paczki</string>
+    <string name="shipment_item_parcel_status_label">Status</string>
+    <string name="shipment_item_parcel_sender_label">Nadawca</string>
+    <string name="shipment_item_more_button">Więcej</string>
+    <string name="shipment_item_date_time_status_awaiting_collection">Oczekuje na odbiór do</string>
+    <string name="shipment_item_date_time_status_delivered">Odebrana</string>
+    <string name="shipment_item_icon_content_description">Ikona paczkomatu</string>
+    <string name="shipment_item_more_icon_content_description">Ikona przycisku więcej</string>
+
+    <string name="header_item_ready_to_pickup">Gotowe do odbioru</string>
+    <string name="header_item_other">Pozostałe</string>
 </resources>

@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">InPost Recruitment Task</string>
-
-    <string name="menu_ready_to_pickup">Ready to collect</string>
-    <string name="menu_other">Other</string>
-    <string name="menu_all">All</string>
-</resources>

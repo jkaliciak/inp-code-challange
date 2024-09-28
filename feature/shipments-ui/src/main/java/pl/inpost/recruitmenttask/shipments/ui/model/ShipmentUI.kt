@@ -1,5 +1,6 @@
 package pl.inpost.recruitmenttask.shipments.ui.model
 
+import pl.inpost.recruitmenttask.common.translation.R
 import pl.inpost.recruitmenttask.shipments.domain.api.model.Shipment
 import java.time.ZonedDateTime
 
@@ -15,7 +16,27 @@ data class ShipmentUI(
     val sender: CustomerUI?,
     val operations: OperationsUI,
     val eventLog: List<EventLogUI>
-)
+) {
+    val isStatusMessageAndDateTimeVisible =
+        status == ShipmentStatusUI.READY_TO_PICKUP || status == ShipmentStatusUI.DELIVERED
+
+    val displayedStatusMessageStringRes: Int? = when (status) {
+        ShipmentStatusUI.READY_TO_PICKUP -> R.string.shipment_item_date_time_status_awaiting_collection
+        ShipmentStatusUI.DELIVERED -> R.string.status_delivered
+        else -> null
+    }
+
+    val displayedStatusDateTime: ZonedDateTime? = when (status) {
+        ShipmentStatusUI.READY_TO_PICKUP -> expiryDate
+        ShipmentStatusUI.DELIVERED -> pickUpDate
+        else -> null
+    }
+
+    val displayedSender: String = sender?.name
+        ?: sender?.email
+        ?: sender?.phoneNumber
+        ?: ""
+}
 
 fun Shipment.toUI() = ShipmentUI(
     number = number,

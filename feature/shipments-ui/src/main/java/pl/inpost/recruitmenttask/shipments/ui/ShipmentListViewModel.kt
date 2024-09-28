@@ -3,10 +3,13 @@ package pl.inpost.recruitmenttask.shipments.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.data.model.AppResult
 import pl.inpost.recruitmenttask.shipments.domain.api.usecase.ObserveShipmentsUseCase
@@ -25,15 +28,12 @@ class ShipmentListViewModel @Inject constructor(
     private val mutableUiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = mutableUiState
 
-    init {
-        refreshShipments()
-        observeShipments()
-    }
+    private val mutableUiEvent = Channel<UiEvent>(Channel.BUFFERED)
+    val uiEvent: Flow<UiEvent> = mutableUiEvent.receiveAsFlow()
 
-    private fun refreshShipments() {
-        viewModelScope.launch {
-            updateShipmentsUseCase.updateShipments()
-        }
+    init {
+        observeShipments()
+        refreshShipments()
     }
 
     private fun observeShipments() {
@@ -41,15 +41,13 @@ class ShipmentListViewModel @Inject constructor(
             .onEach {
                 when (it) {
                     is AppResult.Loading -> {
-                        mutableUiState.setState {
-                            copy(isLoading = it.isLoading)
-                        }
+                        mutableUiState.setState { copy(isRefreshing = it.isLoading) }
                     }
 
                     is AppResult.Success -> {
                         mutableUiState.setState {
                             copy(
-                                isLoading = false,
+                                isRefreshing = false,
                                 shipments = it.data.toUI(),
                             )
                         }
@@ -60,8 +58,26 @@ class ShipmentListViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
+    fun sendUiEvent(uiEvent: UiEvent) {
+        when (uiEvent) {
+            UiEvent.RefreshShipments -> refreshShipments()
+        }
+    }
+
+    private fun refreshShipments() {
+        viewModelScope.launch {
+            mutableUiState.setState { copy(isRefreshing = true) }
+            updateShipmentsUseCase.updateShipments()
+            mutableUiState.setState { copy(isRefreshing = false) }
+        }
+    }
+
     data class UiState(
-        val isLoading: Boolean = false,
+        val isRefreshing: Boolean = false,
         val shipments: List<ShipmentUI> = emptyList(),
     )
+
+    sealed class UiEvent {
+        data object RefreshShipments : UiEvent()
+    }
 }

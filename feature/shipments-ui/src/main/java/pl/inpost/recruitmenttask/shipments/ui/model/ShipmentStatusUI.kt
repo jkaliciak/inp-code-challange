@@ -2,7 +2,7 @@ package pl.inpost.recruitmenttask.shipments.ui.model
 
 import androidx.annotation.StringRes
 import pl.inpost.recruitmenttask.shipments.domain.api.model.ShipmentStatus
-import pl.inpost.recruitmenttask.shipments.ui.R
+import pl.inpost.recruitmenttask.common.translation.R
 
 /**
  * Order of statuses - higher number = higher priority
@@ -20,9 +20,7 @@ import pl.inpost.recruitmenttask.shipments.ui.R
  * 12. READY_TO_PICKUP
  * 13. PICKUP_TIME_EXPIRED
  */
-enum class ShipmentStatusUI(
-    @StringRes val nameRes: Int
-) {
+enum class ShipmentStatusUI(@StringRes val nameStringResId: Int) {
     ADOPTED_AT_SORTING_CENTER(R.string.status_adopted_at_sorting_center),
     SENT_FROM_SORTING_CENTER(R.string.status_sent_from_sorting_center),
     ADOPTED_AT_SOURCE_BRANCH(R.string.status_adopted_at_source_branch),

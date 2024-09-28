@@ -11,7 +11,7 @@ import pl.inpost.recruitmenttask.shipments.data.api.database.model.ShipmentEntit
 @Dao
 interface ShipmentDao {
 
-    @Query("SELECT * FROM shipment JOIN event_log ON shipment.number = event_log.shipmentNumber")
+    @Query("SELECT * FROM shipment LEFT JOIN event_log ON shipment.number = event_log.shipmentNumber")
     fun getShipmentsAndEventLogs(): Flow<Map<ShipmentEntity, List<EventLogEntity>>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
