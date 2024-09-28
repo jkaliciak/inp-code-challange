@@ -14,3 +14,12 @@ dependencyResolutionManagement {
 }
 rootProject.name = "InPost Recruitment Task"
 include ':app'
+include ':common:data'
+include ':common:domain'
+include ':common:ui'
+include ':feature:shipments-ui'
+include ':feature:shipments-domain:api'
+include ':feature:shipments-domain:impl'
+include ':feature:shipments-data:api'
+include ':feature:shipments-data:impl'
+include ':common:theme'

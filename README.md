@@ -40,3 +40,6 @@ If for some reason Figma link stops working, here you can see the requested desi
 ![Design from Figma](./images/Figma.png)
 
 # Good luck! 💪
+
+## Assumptions
+- Figma designs contain mixed polish and english language so i'll stick to english.

@@ -1,20 +1,6 @@
 <resources>
     <string name="app_name">InPost Recruitment Task</string>
 
-    <string name="status_adopted_at_sorting_center">Received at Sort Centre</string>
-    <string name="status_sent_from_sorting_center">Despatched from Sort Centre</string>
-    <string name="status_adopted_at_source_branch">Received at Collection Depot</string>
-    <string name="status_sent_from_source_branch">Despatched from Depot</string>
-    <string name="status_avizo">Returned to Branch</string>
-    <string name="status_confirmed">Prepared by sender</string>
-    <string name="status_created">Parcel created</string>
-    <string name="status_delivered">Delivered</string>
-    <string name="status_other">Other</string>
-    <string name="status_out_for_delivery">Ready for delivery</string>
-    <string name="status_pickup_time_expired">Collection time expired</string>
-    <string name="status_ready_to_pickup">Ready to collect</string>
-    <string name="status_returned_to_sender">Returned to sender</string>
-
     <string name="menu_ready_to_pickup">Ready to collect</string>
     <string name="menu_other">Other</string>
     <string name="menu_all">All</string>
