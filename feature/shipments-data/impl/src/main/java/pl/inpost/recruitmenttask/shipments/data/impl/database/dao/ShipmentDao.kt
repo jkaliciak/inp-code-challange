@@ -5,13 +5,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import pl.inpost.recruitmenttask.shipments.data.api.database.model.ArchivedShipmentEntity
 import pl.inpost.recruitmenttask.shipments.data.api.database.model.EventLogEntity
 import pl.inpost.recruitmenttask.shipments.data.api.database.model.ShipmentEntity
 
 @Dao
 interface ShipmentDao {
 
-    @Query("SELECT * FROM shipment LEFT JOIN event_log ON shipment.number = event_log.shipmentNumber")
+    @Query("SELECT * FROM shipment LEFT JOIN event_log ON shipment.number = event_log.shipmentNumber WHERE shipment.number NOT IN (SELECT shipmentNumber from archived_shipment)")
     fun getShipmentsAndEventLogs(): Flow<Map<ShipmentEntity, List<EventLogEntity>>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -19,4 +20,7 @@ interface ShipmentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEventLogs(vararg eventLogs: EventLogEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertArchivedShipments(vararg archivedShipmentEntity: ArchivedShipmentEntity)
 }

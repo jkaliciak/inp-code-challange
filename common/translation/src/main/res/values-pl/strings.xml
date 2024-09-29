@@ -28,4 +28,5 @@
 
     <string name="header_item_ready_to_pickup">Gotowe do odbioru</string>
     <string name="header_item_other">Pozostałe</string>
+    <string name="shipment_list_general_error">Something went wrong. Please try again later.</string>
 </resources>

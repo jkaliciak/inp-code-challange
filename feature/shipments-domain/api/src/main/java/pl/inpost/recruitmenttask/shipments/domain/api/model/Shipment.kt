@@ -17,8 +17,8 @@ data class Shipment(
 ) {
     val isValid: Boolean = number.isNotBlank() &&
             status != ShipmentStatus.UNKNOWN &&
-            shipmentType != ShipmentType.UNKNOWN
-            && sender != null &&
+            shipmentType != ShipmentType.UNKNOWN &&
+            sender != null &&
             (!sender.name.isNullOrBlank() || !sender.email.isNullOrBlank() ||
                     !sender.phoneNumber.isNullOrBlank())
 }

@@ -7,7 +7,7 @@ import pl.inpost.recruitmenttask.data.model.AppResult
 @Suppress("TooGenericExceptionCaught")
 abstract class SuspendUseCase<in PARAM, RESULT : Any>(private val coroutineDispatcher: CoroutineDispatcher) {
 
-    suspend operator fun invoke(parameters: PARAM? = null): AppResult<RESULT> {
+    suspend operator fun invoke(parameters: PARAM): AppResult<RESULT> {
         return try {
             withContext(coroutineDispatcher) {
                 val result = execute(parameters)
@@ -18,5 +18,5 @@ abstract class SuspendUseCase<in PARAM, RESULT : Any>(private val coroutineDispa
         }
     }
 
-    protected abstract suspend fun execute(parameters: PARAM? = null): RESULT
+    protected abstract suspend fun execute(parameters: PARAM): RESULT
 }

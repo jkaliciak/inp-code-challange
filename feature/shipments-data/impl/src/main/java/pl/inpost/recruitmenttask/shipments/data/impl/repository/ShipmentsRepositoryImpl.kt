@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import pl.inpost.recruitmenttask.data.model.AppResult
+import pl.inpost.recruitmenttask.shipments.data.api.database.model.ArchivedShipmentEntity
 import pl.inpost.recruitmenttask.shipments.data.api.database.model.EventLogEntity
 import pl.inpost.recruitmenttask.shipments.data.api.database.model.ShipmentEntity
 import pl.inpost.recruitmenttask.shipments.data.api.repository.ShipmentsRepository
@@ -18,6 +19,7 @@ class ShipmentsRepositoryImpl(
     private val appDatabase: AppDatabase,
     private val shipmentApi: ShipmentApi,
 ) : ShipmentsRepository {
+
     override fun observeShipments(): Flow<AppResult<Map<ShipmentEntity, List<EventLogEntity>>>> =
         appDatabase.shipmentDao().getShipmentsAndEventLogs()
             .flowOn(Dispatchers.IO)
@@ -34,6 +36,11 @@ class ShipmentsRepositoryImpl(
                 .flatten()
             appDatabase.shipmentDao().insertEventLogs(*eventLog.toTypedArray())
         }
+    }
+
+    override suspend fun archiveShipment(number: String) = withContext(Dispatchers.IO) {
+        val archivedShipmentEntity = ArchivedShipmentEntity(number)
+        appDatabase.shipmentDao().insertArchivedShipments(archivedShipmentEntity)
     }
 }
 

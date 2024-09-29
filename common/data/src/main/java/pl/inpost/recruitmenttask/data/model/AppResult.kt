@@ -14,7 +14,3 @@ sealed class AppResult<out T : Any> {
         }
     }
 }
-
-//fun <T : Any> AppResult<T>.onError(block: (AppResult.Error) -> Unit) {
-//    if (this is AppResult.Error) block(this)
-//}

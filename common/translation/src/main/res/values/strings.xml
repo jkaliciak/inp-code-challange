@@ -27,4 +27,5 @@
 
     <string name="header_item_ready_to_pickup">Ready to collect</string>
     <string name="header_item_other">Other</string>
+    <string name="shipment_list_general_error">Something went wrong. Please try again later.</string>
 </resources>

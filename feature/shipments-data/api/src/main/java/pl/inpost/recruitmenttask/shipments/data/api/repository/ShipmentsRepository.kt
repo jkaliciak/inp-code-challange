@@ -10,4 +10,6 @@ interface ShipmentsRepository {
     fun observeShipments(): Flow<AppResult<Map<ShipmentEntity, List<EventLogEntity>>>>
 
     suspend fun updateShipments()
+
+    suspend fun archiveShipment(number: String)
 }

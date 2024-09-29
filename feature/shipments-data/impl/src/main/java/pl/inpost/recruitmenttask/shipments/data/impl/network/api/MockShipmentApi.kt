@@ -34,6 +34,8 @@ class MockShipmentApi(
     override suspend fun getShipments(): List<ShipmentNetwork> {
         delay(1000)
         return if (firstUse) {
+            // is this made on purpose or is this some bug for me to find
+            // assuming you wanted this to return empty list on first call
             firstUse = false
             emptyList()
         } else {

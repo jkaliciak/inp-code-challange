@@ -8,11 +8,12 @@ import pl.inpost.recruitmenttask.shipments.data.api.repository.ShipmentsReposito
 import pl.inpost.recruitmenttask.shipments.data.impl.database.AppDatabase
 import pl.inpost.recruitmenttask.shipments.data.impl.network.api.ShipmentApi
 import pl.inpost.recruitmenttask.shipments.data.impl.repository.ShipmentsRepositoryImpl
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 class RepositoryModule {
-
+    @Singleton
     @Provides
     fun shipmentsRepository(
         appDatabase: AppDatabase,

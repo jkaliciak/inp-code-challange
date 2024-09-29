@@ -11,8 +11,7 @@ class UpdateShipmentsUseCaseImpl(
     coroutineDispatcher: CoroutineDispatcher
 ) : UpdateShipmentsUseCase, SuspendUseCase<Unit, Unit>(coroutineDispatcher) {
 
-    override suspend fun updateShipments(): AppResult<Unit> = invoke()
+    override suspend fun updateShipments(): AppResult<Unit> = invoke(Unit)
 
-    override suspend fun execute(parameters: Unit?): Unit =
-        shipmentsRepository.updateShipments()
+    override suspend fun execute(parameters: Unit): Unit = shipmentsRepository.updateShipments()
 }
