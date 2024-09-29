@@ -13,9 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import pl.inpost.recruitmenttask.theme.Mercury
-import pl.inpost.recruitmenttask.theme.Typography
+import pl.inpost.recruitmenttask.theme.AppTheme
 
 @Composable
 fun HeaderItem(
@@ -23,8 +21,9 @@ fun HeaderItem(
     @StringRes headerStringResId: Int,
     modifier: Modifier = Modifier,
 ) {
-    val height = if (isFirstItem) 48.dp else 32.dp
-    val paddingBottom = if (isFirstItem) 0.dp else 16.dp
+    val height = if (isFirstItem) AppTheme.dimensions.spacer48 else AppTheme.dimensions.spacer32
+    val paddingBottom =
+        if (isFirstItem) AppTheme.dimensions.spacer0 else AppTheme.dimensions.spacer16
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -35,17 +34,17 @@ fun HeaderItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = paddingBottom)
-                .height(1.dp)
-                .background(color = Mercury)
+                .height(AppTheme.dimensions.spacer1)
+                .background(color = AppTheme.colors.listHeaderLine)
         )
         Text(
             text = stringResource(id = headerStringResId),
-            style = Typography.headlineSmall,
+            style = AppTheme.typography.h7,
             modifier = Modifier
                 .background(color = MaterialTheme.colorScheme.background)
                 .padding(
-                    start = 16.dp,
-                    end = 16.dp,
+                    start = AppTheme.dimensions.spacer16,
+                    end = AppTheme.dimensions.spacer16,
                     bottom = paddingBottom
                 )
         )

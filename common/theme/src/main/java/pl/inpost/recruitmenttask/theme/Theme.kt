@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -61,7 +62,23 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = AppTheme.typography.materialTypography,
         content = content,
     )
 }
+
+object AppTheme {
+    val colors: AppColors
+        @Composable
+        get() = CompositionLocalAppColors.current
+    val dimensions: AppDimensions
+        @Composable
+        get() = CompositionLocalAppDimensions.current
+    val typography: AppTypography
+        @Composable
+        get() = CompositionLocalAppTypography.current
+}
+
+private val CompositionLocalAppColors = staticCompositionLocalOf { AppColors() }
+private val CompositionLocalAppDimensions = staticCompositionLocalOf { AppDimensions() }
+private val CompositionLocalAppTypography = staticCompositionLocalOf { AppTypography() }

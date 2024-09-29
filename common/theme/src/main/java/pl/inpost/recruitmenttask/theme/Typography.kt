@@ -18,31 +18,17 @@ val MontserratFontFamily = FontFamily(
     Font(R.font.montserrat_semibold, FontWeight.SemiBold),
 )
 
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = MontserratFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+data class AppTypography(
+    val materialTypography: Typography = Typography(
+        bodyLarge = TextStyle(
+            fontFamily = MontserratFontFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.5.sp
+        ),
     ),
-    labelMedium = TextStyle(
-        fontFamily = MontserratFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.4.sp,
-        color = OsloGray,
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = MontserratFontFamily,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 13.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.4.sp,
-        color = SilverSand,
-    ),
-    headlineMedium = TextStyle(
+    val h6: TextStyle = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.Medium,
         fontSize = 15.sp,
@@ -50,7 +36,31 @@ val Typography = Typography(
         letterSpacing = 0.4.sp,
         color = ShipGray,
     ),
-    titleMedium = TextStyle(
+    val h7: TextStyle = TextStyle(
+        fontFamily = MontserratFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 13.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.4.sp,
+        color = SilverSand,
+    ),
+    val h9: TextStyle = TextStyle(
+        fontFamily = MontserratFontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp,
+        lineHeight = 18.sp,
+        letterSpacing = 0.4.sp,
+        color = ShipGray,
+    ),
+    val subtitle: TextStyle = TextStyle(
+        fontFamily = MontserratFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 11.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.4.sp,
+        color = OsloGray,
+    ),
+    val status: TextStyle = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 15.sp,
@@ -58,11 +68,19 @@ val Typography = Typography(
         letterSpacing = 0.4.sp,
         color = ShipGray,
     ),
-    titleSmall = TextStyle(
+    val title: TextStyle = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 12.sp,
-        lineHeight = 18.sp,
+        fontSize = 15.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.4.sp,
+        color = ShipGray,
+    ),
+    val date: TextStyle = TextStyle(
+        fontFamily = MontserratFontFamily,
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp,
+        lineHeight = 24.sp,
         letterSpacing = 0.4.sp,
         color = ShipGray,
     ),

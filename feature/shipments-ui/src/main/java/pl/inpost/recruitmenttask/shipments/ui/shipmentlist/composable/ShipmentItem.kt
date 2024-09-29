@@ -17,10 +17,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.unit.dp
 import pl.inpost.recruitmenttask.common.translation.R
 import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentListItemUI
-import pl.inpost.recruitmenttask.theme.Typography
+import pl.inpost.recruitmenttask.theme.AppTheme
 import pl.inpost.recruitmenttask.ui.extensions.formatStatusDateTime
 
 @Composable
@@ -34,8 +33,8 @@ fun ShipmentItem(
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.surface)
                 .padding(
-                    horizontal = 20.dp,
-                    vertical = 16.dp
+                    horizontal = AppTheme.dimensions.spacer20,
+                    vertical = AppTheme.dimensions.spacer16
                 ),
         ) {
             ParcelNumberSection(item.number)
@@ -48,11 +47,11 @@ fun ShipmentItem(
                     ?: "",
                 displayedDateTimeMessage = item.displayedStatusDateTime?.formatStatusDateTime()
                     ?: "",
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = AppTheme.dimensions.spacer8)
             )
             SenderSection(
                 sender = item.displayedSender,
-                modifier = Modifier.padding(top = 8.dp)
+                modifier = Modifier.padding(top = AppTheme.dimensions.spacer8)
             )
         }
         Divider()
@@ -74,11 +73,11 @@ private fun ParcelNumberSection(
             Text(
                 text = stringResource(id = R.string.shipment_item_parcel_number_label)
                     .uppercase(Locale.current.platformLocale),
-                style = Typography.labelMedium,
+                style = AppTheme.typography.subtitle,
             )
             Text(
                 text = number,
-                style = Typography.headlineMedium,
+                style = AppTheme.typography.h6,
             )
         }
 
@@ -87,7 +86,7 @@ private fun ParcelNumberSection(
             contentDescription = stringResource(id = R.string.shipment_item_icon_content_description),
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(start = 8.dp)
+                .padding(start = AppTheme.dimensions.spacer8)
         )
     }
 }
@@ -112,12 +111,12 @@ private fun StatusSection(
             Text(
                 text = stringResource(id = R.string.shipment_item_parcel_status_label)
                     .uppercase(Locale.current.platformLocale),
-                style = Typography.labelMedium,
+                style = AppTheme.typography.subtitle,
                 modifier = Modifier.wrapContentWidth(),
             )
             Text(
                 text = status,
-                style = Typography.titleMedium,
+                style = AppTheme.typography.status,
                 modifier = Modifier.wrapContentWidth(),
             )
         }
@@ -130,14 +129,14 @@ private fun StatusSection(
             ) {
                 Text(
                     text = displayedStatusMessage.uppercase(Locale.current.platformLocale),
-                    style = Typography.labelMedium,
+                    style = AppTheme.typography.subtitle,
                     modifier = Modifier
                         .wrapContentWidth()
                         .align(Alignment.End),
                 )
                 Text(
                     text = displayedDateTimeMessage,
-                    style = Typography.headlineMedium,
+                    style = AppTheme.typography.date,
                     modifier = Modifier
                         .wrapContentWidth()
                         .align(Alignment.End),
@@ -164,12 +163,12 @@ private fun SenderSection(
             Text(
                 text = stringResource(id = R.string.shipment_item_parcel_sender_label)
                     .uppercase(Locale.current.platformLocale),
-                style = Typography.labelMedium,
+                style = AppTheme.typography.subtitle,
                 modifier = Modifier.wrapContentWidth()
             )
             Text(
                 text = sender,
-                style = Typography.titleMedium,
+                style = AppTheme.typography.status,
                 modifier = Modifier.wrapContentWidth()
             )
         }
@@ -182,12 +181,12 @@ private fun SenderSection(
             Text(
                 text = stringResource(id = R.string.shipment_item_more_button)
                     .lowercase(Locale.current.platformLocale),
-                style = Typography.titleSmall,
+                style = AppTheme.typography.h9,
             )
             Image(
                 imageVector = ImageVector.vectorResource(id = pl.inpost.recruitmenttask.shipments.ui.R.drawable.ic_rightward_arrow),
                 contentDescription = stringResource(id = R.string.shipment_item_more_icon_content_description),
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier.padding(start = AppTheme.dimensions.spacer4),
             )
         }
     }

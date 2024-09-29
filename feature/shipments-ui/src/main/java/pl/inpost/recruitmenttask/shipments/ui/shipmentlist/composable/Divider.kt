@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.unit.dp
+import pl.inpost.recruitmenttask.theme.AppTheme
 import pl.inpost.recruitmenttask.theme.Iron
 
 @Composable
@@ -16,10 +16,10 @@ fun Divider() {
     Spacer(
         modifier = Modifier
             .fillMaxWidth()
-            .height(16.dp)
+            .height(AppTheme.dimensions.spacer16)
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(Iron, MaterialTheme.colorScheme.background),
+                    colors = listOf(AppTheme.colors.shadowStart, AppTheme.colors.shadowEnd),
                     endY = 15f
                 )
             )

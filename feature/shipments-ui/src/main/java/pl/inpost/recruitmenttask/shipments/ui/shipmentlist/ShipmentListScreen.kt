@@ -16,12 +16,13 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListViewModel.UiEvent
 import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.composable.ShipmentList
-import pl.inpost.recruitmenttask.theme.Typography
+import pl.inpost.recruitmenttask.theme.AppTheme
 import pl.inpost.recruitmenttask.common.translation.R as translationR
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,11 +33,11 @@ fun ShipmentListScreen(modifier: Modifier = Modifier) {
     val uiError by viewModel.uiError.collectAsStateWithLifecycle(null)
     val pullRefreshState = rememberPullToRefreshState()
     val snackbarHostState = SnackbarHostState()
+    val context = LocalContext.current
 
-    val generalErrorMessage = stringResource(id = translationR.string.shipment_list_general_error)
     LaunchedEffect(key1 = uiError) {
         snackbarHostState.showSnackbar(
-            message = generalErrorMessage,
+            message = context.getString(translationR.string.shipment_list_general_error),
             duration = SnackbarDuration.Short,
         )
     }
@@ -53,7 +54,7 @@ fun ShipmentListScreen(modifier: Modifier = Modifier) {
                     title = {
                         Text(
                             text = stringResource(id = translationR.string.app_name),
-                            style = Typography.titleMedium,
+                            style = AppTheme.typography.title,
                         )
                     },
                 )

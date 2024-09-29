@@ -13,3 +13,9 @@ val Mercury = Color(0xFFE9E9E9)
 val Iron = Color(0xFFE5E6E7)
 val Concrete = Color(0xFFF2F2F2)
 val White = Color(0xFFFFFFFF)
+
+data class AppColors(
+    val shadowStart: Color = Iron,
+    val shadowEnd: Color = Concrete,
+    val listHeaderLine: Color = Mercury,
+)

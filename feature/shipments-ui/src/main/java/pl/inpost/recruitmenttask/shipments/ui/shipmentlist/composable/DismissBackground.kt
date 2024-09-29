@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import pl.inpost.recruitmenttask.theme.AppTheme
 
 @Composable
 fun ArchiveBackground(swipeDismissState: SwipeToDismissBoxState) {
@@ -31,7 +31,7 @@ fun ArchiveBackground(swipeDismissState: SwipeToDismissBoxState) {
         modifier = Modifier
             .fillMaxSize()
             .background(color)
-            .padding(16.dp),
+            .padding(AppTheme.dimensions.spacer16),
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -42,7 +42,7 @@ fun ArchiveBackground(swipeDismissState: SwipeToDismissBoxState) {
         )
         Spacer(
             modifier = Modifier
-                .height(16.dp)
+                .height(AppTheme.dimensions.spacer16)
                 .background(color = MaterialTheme.colorScheme.background)
         )
     }
