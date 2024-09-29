@@ -26,14 +26,18 @@ class ObserveShipmentsUseCaseImpl(
             when (it) {
                 is AppResult.Loading -> AppResult.Loading(it.isLoading)
 
-                is AppResult.Success -> AppResult.Success(it.data.toDomain())
+                is AppResult.Success -> {
+                    val shipments = it.data.toDomain()
+                        .filter { shipment -> shipment.isValid }
+                    AppResult.Success(shipments)
+                }
 
                 is AppResult.Error -> AppResult.Error(it.throwable)
             }
         }
 
-    private fun Map<ShipmentEntity, List<EventLogEntity>>.toDomain(): List<Shipment> {
-        val shipments = map { entry ->
+    private fun Map<ShipmentEntity, List<EventLogEntity>>.toDomain(): List<Shipment> =
+        map { entry ->
             val eventLog = entry.value.toDomain()
             Shipment(
                 number = entry.key.number,
@@ -49,6 +53,4 @@ class ObserveShipmentsUseCaseImpl(
                 eventLog = eventLog
             )
         }
-        return shipments
-    }
 }

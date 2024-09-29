@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.shipments.ui
+package pl.inpost.recruitmenttask.shipments.ui.shipmentlist
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,9 +34,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import pl.inpost.recruitmenttask.shipments.ui.ShipmentListViewModel.UiEvent
-import pl.inpost.recruitmenttask.shipments.ui.ShipmentListViewModel.UiState
-import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentUI
+import pl.inpost.recruitmenttask.shipments.ui.R
+import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentListItemUI
+import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListViewModel.UiEvent
+import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListViewModel.UiState
 import pl.inpost.recruitmenttask.theme.Concrete
 import pl.inpost.recruitmenttask.theme.Iron
 import pl.inpost.recruitmenttask.theme.Mercury
@@ -93,13 +94,27 @@ private fun ShipmentList(
                 .fillMaxSize()
                 .background(Concrete),
         ) {
-            items(
+            itemsIndexed(
                 items = uiState.shipments,
-                key = { item: ShipmentUI -> item.number },
-            ) { item: ShipmentUI ->
-                // TODO generate amd display headers, sort list, etc
-//                HeaderItem(headerStringResId = translationR.string.header_item_ready_to_pickup)
-                ShipmentItem(item)
+                key = { index: Int, item: ShipmentListItemUI ->
+                    when (item) {
+                        is ShipmentListItemUI.HeaderUI -> item.status.ordinal
+                        is ShipmentListItemUI.ShipmentUI -> item.number
+                    }
+                },
+            ) { index: Int, item: ShipmentListItemUI ->
+                when (item) {
+                    is ShipmentListItemUI.HeaderUI -> {
+                        HeaderItem(
+                            isFirstItem = index == 0,
+                            headerStringResId = item.status.nameStringResId
+                        )
+                    }
+
+                    is ShipmentListItemUI.ShipmentUI -> {
+                        ShipmentItem(item)
+                    }
+                }
             }
         }
     }
@@ -107,19 +122,22 @@ private fun ShipmentList(
 
 @Composable
 private fun HeaderItem(
+    isFirstItem: Boolean,
     @StringRes headerStringResId: Int,
     modifier: Modifier = Modifier,
 ) {
+    val height = if (isFirstItem) 48.dp else 32.dp
+    val paddingBottom = if (isFirstItem) 0.dp else 16.dp
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .fillMaxWidth()
-            .height(32.dp)
+            .height(height)
     ) {
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(bottom = paddingBottom)
                 .height(1.dp)
                 .background(color = Mercury)
         )
@@ -131,7 +149,7 @@ private fun HeaderItem(
                 .padding(
                     start = 16.dp,
                     end = 16.dp,
-                    bottom = 16.dp
+                    bottom = paddingBottom
                 )
         )
     }
@@ -139,7 +157,7 @@ private fun HeaderItem(
 
 @Composable
 private fun ShipmentItem(
-    item: ShipmentUI,
+    item: ShipmentListItemUI.ShipmentUI,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {

@@ -1,4 +1,4 @@
-package pl.inpost.recruitmenttask.shipments.ui
+package pl.inpost.recruitmenttask.shipments.ui.shipmentlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import pl.inpost.recruitmenttask.data.model.AppResult
 import pl.inpost.recruitmenttask.shipments.domain.api.usecase.ObserveShipmentsUseCase
 import pl.inpost.recruitmenttask.shipments.domain.api.usecase.UpdateShipmentsUseCase
-import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentUI
+import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentListItemUI
 import pl.inpost.recruitmenttask.shipments.ui.model.toUI
 import pl.inpost.recruitmenttask.ui.extensions.setState
 import javax.inject.Inject
@@ -48,7 +48,9 @@ class ShipmentListViewModel @Inject constructor(
                         mutableUiState.setState {
                             copy(
                                 isRefreshing = false,
-                                shipments = it.data.toUI(),
+                                shipments = it.data
+                                    .toUI()
+                                    .transformToGroupedAndSortedList(),
                             )
                         }
                     }
@@ -74,7 +76,7 @@ class ShipmentListViewModel @Inject constructor(
 
     data class UiState(
         val isRefreshing: Boolean = false,
-        val shipments: List<ShipmentUI> = emptyList(),
+        val shipments: List<ShipmentListItemUI> = emptyList(),
     )
 
     sealed class UiEvent {

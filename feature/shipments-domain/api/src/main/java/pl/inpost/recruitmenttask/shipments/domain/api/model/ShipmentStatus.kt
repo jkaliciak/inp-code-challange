@@ -17,19 +17,19 @@ package pl.inpost.recruitmenttask.shipments.domain.api.model
  * 13. PICKUP_TIME_EXPIRED
  */
 enum class ShipmentStatus {
-    ADOPTED_AT_SORTING_CENTER,
-    SENT_FROM_SORTING_CENTER,
+    CREATED,
+    CONFIRMED,
     ADOPTED_AT_SOURCE_BRANCH,
     SENT_FROM_SOURCE_BRANCH,
-    AVIZO,
-    CONFIRMED,
-    CREATED,
-    DELIVERED,
+    ADOPTED_AT_SORTING_CENTER,
+    SENT_FROM_SORTING_CENTER,
     OTHER,
-    OUT_FOR_DELIVERY,
-    PICKUP_TIME_EXPIRED,
-    READY_TO_PICKUP,
+    DELIVERED,
     RETURNED_TO_SENDER,
+    AVIZO,
+    OUT_FOR_DELIVERY,
+    READY_TO_PICKUP,
+    PICKUP_TIME_EXPIRED,
     UNKNOWN;
 
     companion object {

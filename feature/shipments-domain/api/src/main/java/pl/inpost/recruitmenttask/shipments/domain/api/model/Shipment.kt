@@ -14,4 +14,11 @@ data class Shipment(
     val sender: Customer?,
     val operations: Operations,
     val eventLog: List<EventLog>,
-)
+) {
+    val isValid: Boolean = number.isNotBlank() &&
+            status != ShipmentStatus.UNKNOWN &&
+            shipmentType != ShipmentType.UNKNOWN
+            && sender != null &&
+            (!sender.name.isNullOrBlank() || !sender.email.isNullOrBlank() ||
+                    !sender.phoneNumber.isNullOrBlank())
+}

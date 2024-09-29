@@ -43,3 +43,11 @@ If for some reason Figma link stops working, here you can see the requested desi
 
 ## Assumptions
 - Figma designs contain mixed polish and english language so i'll stick to english.
+- Grouping each status together by shipment status and adding separate group for. Not clear from task description or mocks what shipments should be grouped together under what header.
+- Task doesn't include navigation so skipping navigation setup. Otherwise would use probably Jetpack Navigation component and navigation events in VM.
+- 
+
+## Comments
+- Using Compose because InPost must be refactoring already and it's new code.
+- Using kotlin gradle dsl and plugins because its easier to maintain multi-module app.
+- Added Shipment.isValid property used to filter out shipments with invalid data.
