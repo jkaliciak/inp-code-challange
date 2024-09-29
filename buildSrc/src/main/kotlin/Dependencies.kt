@@ -48,7 +48,7 @@ object Dependencies {
         "org.jetbrains.kotlin:kotlin-test:${Versions.kotlinTest}" // testImplementation
     const val turbine = "app.cash.turbine:turbine:${Versions.turbine}" // testImplementation
     const val kotlinxCoroutineTest =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-test${Versions.kotlinxCoroutineTest}" // testImplementation
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutineTest}" // testImplementation
 
 
     const val roomTesting = "androidx.room:room-testing:${Versions.room}" // testImplementation

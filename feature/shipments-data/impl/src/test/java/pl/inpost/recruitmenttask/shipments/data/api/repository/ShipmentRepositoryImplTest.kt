@@ -10,6 +10,8 @@ import pl.inpost.recruitmenttask.shipments.data.impl.database.AppDatabase
 import pl.inpost.recruitmenttask.shipments.data.impl.network.api.ShipmentApi
 import pl.inpost.recruitmenttask.shipments.data.impl.repository.ShipmentsRepositoryImpl
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.runTest
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ShipmentRepositoryImplTest {
@@ -30,7 +32,7 @@ class ShipmentRepositoryImplTest {
     }
 
     @Test
-    fun should() = testDispatcher.runTest {
+    fun `should asd`() = runTest {
         underTest.updateShipments()
     }
 }
