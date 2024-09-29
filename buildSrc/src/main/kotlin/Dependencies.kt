@@ -42,6 +42,15 @@ object Dependencies {
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}" // kapt
 
     const val junit = "junit:junit:${Versions.junit}" // testImplementation
+    const val mockK = "io.mockk:mockk:${Versions.mockK}" // testImplementation
+    const val mockKAndroid = "io.mockk:mockk-android:${Versions.mockK}" // testImplementation
+    const val kotlinTest =
+        "org.jetbrains.kotlin:kotlin-test:${Versions.kotlinTest}" // testImplementation
+    const val turbine = "app.cash.turbine:turbine:${Versions.turbine}" // testImplementation
+    const val kotlinxCoroutineTest =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test${Versions.kotlinxCoroutineTest}" // testImplementation
+
+
     const val roomTesting = "androidx.room:room-testing:${Versions.room}" // testImplementation
     const val junitExt = "androidx.test.ext:junit:${Versions.junitExt}" // androidTestImplementation
     const val espressoCore =
@@ -81,4 +90,13 @@ fun DependencyHandler.compose() {
 
 fun DependencyHandler.coroutines() {
     implementation(Dependencies.coroutinesCore)
+}
+
+fun DependencyHandler.unitTest() {
+    testImplementation(Dependencies.kotlinxCoroutineTest)
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.mockK)
+    testImplementation(Dependencies.mockKAndroid)
+    testImplementation(Dependencies.kotlinTest)
+    testImplementation(Dependencies.turbine)
 }

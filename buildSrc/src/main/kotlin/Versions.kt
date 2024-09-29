@@ -17,7 +17,13 @@ object Versions {
     const val kotlinxCollectionsImmutable = "0.3.5"
     const val hiltNavigationCompose = "1.1.0-beta01"
     const val hilt = "2.48"
+
     const val junit = "4.13.2"
+    const val mockK = "1.13.12"
+    const val kotlinTest = "1.9.24"
+    const val turbine = "1.1.0"
+    const val kotlinxCoroutineTest = "1.9.0"
+
     const val junitExt = "1.1.5"
     const val espresso = "3.5.1"
 }

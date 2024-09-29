@@ -19,6 +19,7 @@ dependencies {
     implementation(Dependencies.lifecycleRuntimeCompose)
     implementation(Dependencies.activityCompose)
     implementation(Dependencies.material3)
+    coroutines()
     compose()
     room()
     hilt()
@@ -27,7 +28,7 @@ dependencies {
 
     implementation(Dependencies.moshi)
 
-    testImplementation(Dependencies.junit)
+    unitTest()
 
     androidTestImplementation(Dependencies.junitExt)
     androidTestImplementation(Dependencies.espressoCore)
