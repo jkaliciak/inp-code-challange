@@ -11,7 +11,7 @@ object Versions {
     const val coreKtx = "1.12.0"
     const val lifecycle = "2.6.2"
     const val activityCompose = "1.8.0"
-    const val material3 = "1.10.0"
+    const val material3 = "1.3.0"
     const val room = "2.5.2"
     const val composeBom = "2024.09.02"
     const val kotlinxCollectionsImmutable = "0.3.5"

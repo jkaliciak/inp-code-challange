@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -38,11 +39,9 @@ import pl.inpost.recruitmenttask.shipments.ui.R
 import pl.inpost.recruitmenttask.shipments.ui.model.ShipmentListItemUI
 import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListViewModel.UiEvent
 import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListViewModel.UiState
-import pl.inpost.recruitmenttask.theme.Concrete
 import pl.inpost.recruitmenttask.theme.Iron
 import pl.inpost.recruitmenttask.theme.Mercury
 import pl.inpost.recruitmenttask.theme.Typography
-import pl.inpost.recruitmenttask.theme.White
 import pl.inpost.recruitmenttask.ui.extensions.formatStatusDateTime
 import pl.inpost.recruitmenttask.common.translation.R as translationR
 
@@ -51,69 +50,60 @@ import pl.inpost.recruitmenttask.common.translation.R as translationR
 fun ShipmentListScreen(modifier: Modifier = Modifier) {
     val viewModel: ShipmentListViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        stringResource(id = translationR.string.app_name),
-                        style = Typography.titleMedium,
-                    )
-                },
-                modifier = Modifier.background(color = White)
-            )
-        },
-        content = { paddingValues ->
-            ShipmentList(
-                modifier = modifier.padding(paddingValues),
-                uiState = uiState,
-                onSendUiEvent = { viewModel.sendUiEvent(UiEvent.RefreshShipments) }
-            )
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ShipmentList(
-    modifier: Modifier = Modifier,
-    uiState: UiState,
-    onSendUiEvent: () -> Unit
-) {
     val pullRefreshState = rememberPullToRefreshState()
 
     PullToRefreshBox(
         modifier = modifier.fillMaxSize(),
         state = pullRefreshState,
         isRefreshing = uiState.isRefreshing,
-        onRefresh = onSendUiEvent,
+        onRefresh = { viewModel.sendUiEvent(UiEvent.RefreshShipments) },
     ) {
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .background(Concrete),
-        ) {
-            itemsIndexed(
-                items = uiState.shipments,
-                key = { index: Int, item: ShipmentListItemUI ->
-                    when (item) {
-                        is ShipmentListItemUI.HeaderUI -> item.status.ordinal
-                        is ShipmentListItemUI.ShipmentUI -> item.number
-                    }
-                },
-            ) { index: Int, item: ShipmentListItemUI ->
-                when (item) {
-                    is ShipmentListItemUI.HeaderUI -> {
-                        HeaderItem(
-                            isFirstItem = index == 0,
-                            headerStringResId = item.status.nameStringResId
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(id = translationR.string.app_name),
+                            style = Typography.titleMedium,
                         )
-                    }
+                    },
+                )
+            },
+            content = { paddingValues ->
+                ShipmentList(
+                    modifier = modifier.padding(paddingValues),
+                    uiState = uiState,
+                )
+            }
+        )
+    }
+}
 
-                    is ShipmentListItemUI.ShipmentUI -> {
-                        ShipmentItem(item)
-                    }
+@Composable
+private fun ShipmentList(
+    modifier: Modifier = Modifier,
+    uiState: UiState,
+) {
+    LazyColumn(modifier = modifier.fillMaxSize()) {
+        itemsIndexed(
+            items = uiState.shipments,
+            key = { index: Int, item: ShipmentListItemUI ->
+                when (item) {
+                    is ShipmentListItemUI.HeaderUI -> item.status.ordinal
+                    is ShipmentListItemUI.ShipmentUI -> item.number
+                }
+            },
+        ) { index: Int, item: ShipmentListItemUI ->
+            when (item) {
+                is ShipmentListItemUI.HeaderUI -> {
+                    HeaderItem(
+                        isFirstItem = index == 0,
+                        headerStringResId = item.status.nameStringResId
+                    )
+                }
+
+                is ShipmentListItemUI.ShipmentUI -> {
+                    ShipmentItem(item)
                 }
             }
         }
@@ -145,7 +135,7 @@ private fun HeaderItem(
             text = stringResource(id = headerStringResId),
             style = Typography.headlineSmall,
             modifier = Modifier
-                .background(color = Concrete)
+                .background(color = MaterialTheme.colorScheme.background)
                 .padding(
                     start = 16.dp,
                     end = 16.dp,
@@ -164,7 +154,7 @@ private fun ShipmentItem(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .background(White)
+                .background(color = MaterialTheme.colorScheme.surface)
                 .padding(
                     horizontal = 20.dp,
                     vertical = 16.dp
@@ -192,10 +182,7 @@ private fun ShipmentItem(
                 .height(16.dp)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(
-                            Iron,
-                            Color.Transparent
-                        ),
+                        colors = listOf(Iron, Color.Transparent),
                         endY = 15f
                     )
                 )

@@ -6,5 +6,5 @@ import pl.inpost.recruitmenttask.shipments.ui.shipmentlist.ShipmentListScreen
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    ShipmentListScreen()
+    ShipmentListScreen(modifier = modifier)
 }
