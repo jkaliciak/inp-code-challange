@@ -17,4 +17,6 @@ dependencies {
     compose()
     coroutines()
     hilt()
+
+    unitTest()
 }

@@ -1,6 +1,7 @@
 package pl.inpost.recruitmenttask.shipments.data.impl.repository
 
 import androidx.room.withTransaction
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -18,6 +19,7 @@ import pl.inpost.recruitmenttask.shipments.data.impl.network.model.toEntity
 class ShipmentsRepositoryImpl(
     private val appDatabase: AppDatabase,
     private val shipmentApi: ShipmentApi,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ShipmentsRepository {
 
     override fun observeShipments(): Flow<AppResult<Map<ShipmentEntity, List<EventLogEntity>>>> =
@@ -25,7 +27,7 @@ class ShipmentsRepositoryImpl(
             .flowOn(Dispatchers.IO)
             .map { AppResult.Success(it) }
 
-    override suspend fun updateShipments() = withContext(Dispatchers.IO) {
+    override suspend fun updateShipments() = withContext(dispatcher) {
         appDatabase.withTransaction {
             val response = shipmentApi.getShipments()
 
@@ -38,7 +40,7 @@ class ShipmentsRepositoryImpl(
         }
     }
 
-    override suspend fun archiveShipment(number: String) = withContext(Dispatchers.IO) {
+    override suspend fun archiveShipment(number: String) = withContext(dispatcher) {
         val archivedShipmentEntity = ArchivedShipmentEntity(number)
         appDatabase.shipmentDao().insertArchivedShipments(archivedShipmentEntity)
     }

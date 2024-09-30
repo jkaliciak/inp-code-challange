@@ -19,6 +19,6 @@ data class Shipment(
             status != ShipmentStatus.UNKNOWN &&
             shipmentType != ShipmentType.UNKNOWN &&
             sender != null &&
-            (!sender.name.isNullOrBlank() || !sender.email.isNullOrBlank() ||
+            (!sender.name.isNullOrBlank() && !sender.email.isNullOrBlank() &&
                     !sender.phoneNumber.isNullOrBlank())
 }

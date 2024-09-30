@@ -52,12 +52,9 @@ class AndroidLibraryPlugin : Plugin<Project> {
             buildFeatures {
                 compose = true
             }
+
             composeOptions {
                 kotlinCompilerExtensionVersion = Versions.composeCompiler
-            }
-
-            testOptions.unitTests.all {
-                it.useJUnitPlatform()
             }
         }
     }

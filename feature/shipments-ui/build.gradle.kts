@@ -31,7 +31,7 @@ dependencies {
     implementation(Dependencies.hiltNavigationCompose)
     implementation(Dependencies.kotlinxCollectionsImmutable) // collections compose treat as stable
 
-    testImplementation(Dependencies.junit)
+    unitTest()
 
     androidTestImplementation(Dependencies.junitExt)
     androidTestImplementation(Dependencies.espressoCore)
